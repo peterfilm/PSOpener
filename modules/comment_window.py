@@ -2,8 +2,18 @@ from PyQt5.QtWidgets import QApplication, QWidget, QDialog
 import sys
 from pynput import keyboard
 from data.design_comment_window import UiComment
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer
 from modules.api import conf, keys
+import pygetwindow as gw
+
+
+def activate_window_by_title(window_title):
+    window = gw.getWindowsWithTitle(window_title)
+    if window:
+        # Activate the first window with the given title
+        window[0].activate()
+        return True
+    return False
 
 
 class CommentWindow(QDialog, UiComment):
@@ -11,24 +21,16 @@ class CommentWindow(QDialog, UiComment):
     Окошко для комментария
     '''
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
         self.setupUi(self)
         self.show()
 
+        self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
+        self.setWindowModality(Qt.ApplicationModal)  # Set modal behavior
 
-def on_press(key):
-    try:
-        if key == keys[conf['SHORTCUT']]:
-            window.pshop.count_open()
-    except AttributeError:
-        pass
+        self.pushButton_ok.clicked.connect(self.close_and_activate)
 
-
-if __name__ == "__main__":
-    # Start the pynput listener
-    app = QApplication(sys.argv)
-    window = CommentWindow()
-    window.show()
-    with keyboard.Listener(on_press=on_press) as listener:
-        sys.exit(app.exec_())
+    def close_and_activate(self):
+        self.close()
+        activate_window_by_title('Photoshop')

@@ -1,10 +1,11 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget
-from PyQt5.QtCore import Qt, QThread, pyqtSignal
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QDialog
+from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
 import sys
 from pynput import keyboard
 from data.design import UI
 from data.design_comment_window import UiComment
 from modules import *
+import pygetwindow as gw
 
 
 class PSOpener(QWidget, UI):
@@ -43,9 +44,8 @@ class PSOpener(QWidget, UI):
         self.pushButton_oneComment.clicked.connect(self.open_modal_comment)
 
     def open_modal_comment(self):
-        modal = CommentWindow()
-        modal.setWindowFlags(modal.windowFlags() | Qt.Window)
-        modal.exec_()
+        modal = CommentWindow(self)
+        modal.show()
 
 
 class ListenerThread(QThread):
