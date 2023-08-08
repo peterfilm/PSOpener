@@ -14,11 +14,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class UiComment(object):
     def setupUi(self, CommentOfUser):
         CommentOfUser.setObjectName("CommentOfUser")
-        CommentOfUser.resize(768, 87)
-        CommentOfUser.setMinimumSize(QtCore.QSize(768, 87))
-        CommentOfUser.setMaximumSize(QtCore.QSize(768, 87))
+        CommentOfUser.resize(768, 100)
+        CommentOfUser.setMinimumSize(QtCore.QSize(768, 100))
+        CommentOfUser.setMaximumSize(QtCore.QSize(768, 100))
         self.layoutWidget = QtWidgets.QWidget(CommentOfUser)
-        self.layoutWidget.setGeometry(QtCore.QRect(30, 20, 714, 41))
+        self.layoutWidget.setGeometry(QtCore.QRect(30, 30, 714, 41))
         self.layoutWidget.setObjectName("layoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -46,11 +46,19 @@ class UiComment(object):
         self.pushButton_cancel.setObjectName("pushButton_cancel")
         self.horizontalLayout.addWidget(self.pushButton_cancel)
         self.label = QtWidgets.QLabel(CommentOfUser)
-        self.label.setGeometry(QtCore.QRect(290, 60, 231, 16))
+        self.label.setGeometry(QtCore.QRect(290, 70, 231, 16))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label.setFont(font)
         self.label.setObjectName("label")
+        self.label_name = QtWidgets.QLabel(CommentOfUser)
+        self.label_name.setGeometry(QtCore.QRect(30, 10, 711, 20))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_name.setFont(font)
+        self.label_name.setStyleSheet("color: #787878")
+        self.label_name.setText("")
+        self.label_name.setObjectName("label_name")
 
         self.retranslateUi(CommentOfUser)
         QtCore.QMetaObject.connectSlotsByName(CommentOfUser)
@@ -58,7 +66,7 @@ class UiComment(object):
     def retranslateUi(self, CommentOfUser):
         _translate = QtCore.QCoreApplication.translate
         CommentOfUser.setWindowTitle(_translate(
-            "CommentOfUser", "Добавьте комментарий к фотографии"))
+            "CommentOfUser", "Добавить комментарий к фотографии"))
         self.pushButton_ok.setText(_translate("CommentOfUser", "Отправить"))
         self.pushButton_cancel.setText(_translate("CommentOfUser", "Отменить"))
         self.label.setText(_translate(

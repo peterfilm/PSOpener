@@ -26,11 +26,15 @@ class CommentWindow(QDialog, UiComment):
         self.setupUi(self)
         self.show()
 
-        self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
+        self.setWindowFlags(self.windowFlags() |
+                            Qt.WindowStaysOnTopHint)
         self.setWindowModality(Qt.ApplicationModal)  # Set modal behavior
+        self.lineEdit_comment.setFocus()
 
         self.pushButton_ok.clicked.connect(self.close_and_activate)
+        self.returnto = gw.getActiveWindow().title
+        self.label_name.setText(self.returnto.split(' @')[0])
 
     def close_and_activate(self):
+        activate_window_by_title(self.returnto)
         self.close()
-        activate_window_by_title('Photoshop')

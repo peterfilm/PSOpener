@@ -23,3 +23,4 @@ from modules._clicable_label import ClickableLabel
 from modules._checker import Checker
 from modules._no_photoshop import PhotoshopChecker
 from modules._disable_combobox import disable_item
+from modules._ps_name import PSName

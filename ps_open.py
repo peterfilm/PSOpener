@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QDialog
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
+from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QEvent
 import sys
 from pynput import keyboard
 from data.design import UI
@@ -46,6 +46,14 @@ class PSOpener(QWidget, UI):
     def open_modal_comment(self):
         modal = CommentWindow(self)
         modal.show()
+
+    # def event(self, event):
+    #     # Override event function to keep the window running in the background
+    #     if event.type() == QEvent.WindowStateChange and self.isMinimized():
+    #         self.hide()  # Hide the window when it's minimized
+    #         event.ignore()  # Ignore the event to prevent closing the application
+    #         return True
+    #     return super().event(event)
 
 
 class ListenerThread(QThread):
