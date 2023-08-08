@@ -1,4 +1,4 @@
-from modules.api import load_api_keys, load_key_to_api, conf
+from modules.api import load_key_to_api, conf
 from functools import partial
 
 
@@ -38,13 +38,14 @@ class ChoseExtensions:
             partial(self.check_raws, 'BMP', self.mw.checkBox_bmp))
 
     def check_raws(self, value, button):
-        conf = load_api_keys()
         if button.isChecked():
             conf['SELECTED_EXTENSIONS'].extend(conf[value])
             load_key_to_api('SELECTED_EXTENSIONS',
                             conf['SELECTED_EXTENSIONS'])
+            conf['SELECTED_EXTENSIONS'] = conf['SELECTED_EXTENSIONS']
         else:
             for i in conf[value]:
                 conf['SELECTED_EXTENSIONS'].remove(i)
             load_key_to_api('SELECTED_EXTENSIONS',
                             conf['SELECTED_EXTENSIONS'])
+            conf['SELECTED_EXTENSIONS'] = conf['SELECTED_EXTENSIONS']

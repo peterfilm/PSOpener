@@ -1,7 +1,8 @@
 import subprocess
-from modules.api import load_api_keys
+from modules.api import conf
 from modules._no_photoshop import PhotoshopChecker
 import time
+from modules._checker import Checker
 
 
 def open_photos_in_photoshop(file_paths, ps_path):
@@ -25,15 +26,14 @@ class Photoshop:
         self.mw.pushButton_allOpen.clicked.connect(self.count_open)
 
     def one_open(self):
-        ps_path = load_api_keys()['PS_PATH']
+        ps_path = conf['PS_PATH']
         file_path = self.mw.listWidget.currentItem().value
         open_photos_in_photoshop([file_path], ps_path)
 
     def count_open(self):
-        ps_path = load_api_keys()['PS_PATH']
+        ps_path = conf['PS_PATH']
         if ps_path:
             try:
-                conf = load_api_keys()
                 count = conf['COUNT']
                 items_to_remove = []
                 for i in range(count):
@@ -44,5 +44,6 @@ class Photoshop:
                     if item:
                         items_to_remove.append(item.value)
                 open_photos_in_photoshop(items_to_remove, ps_path)
+                Checker.checker(self.mw)
             except Exception as e:
                 print(f'Error {e}')

@@ -1,7 +1,7 @@
 from PyQt5.QtGui import QCursor, QPixmap
 from PyQt5.QtCore import Qt, QCoreApplication
 from PyQt5.QtWidgets import QMessageBox
-from modules.api import load_api_keys
+from modules.api import conf
 
 
 class PhotoshopChecker:
@@ -43,7 +43,6 @@ class PhotoshopChecker:
         PhotoshopChecker.disabler(self, PhotoshopChecker.ISPHOTOSHOP)
 
     def check_photoshop(self):
-        conf = load_api_keys()
         if conf['PS_PATH']:
             return True
         else:

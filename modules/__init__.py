@@ -17,6 +17,7 @@ from modules.photoshop import Photoshop
 # Дополнительные функции
 from modules.api import load_key_to_api
 from modules.api import load_api_keys
+from modules.api import keys
 from modules._clicable_label import ClickableLabel
 from modules._checker import Checker
 from modules._no_photoshop import PhotoshopChecker

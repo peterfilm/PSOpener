@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMessageBox
-from modules.api import conf, load_key_to_api, load_api_keys
+from modules.api import conf, load_key_to_api
 from modules._no_photoshop import PhotoshopChecker
 
 
@@ -25,9 +25,11 @@ class PSSelect:
         if link and conf['PHOTOSHOP_NAME'] == link.split('/')[-1]:
             self.mw.lineEdit_psPath.setText(link)
             load_key_to_api('PS_PATH', link)
+            conf['PS_PATH'] = link
             PhotoshopChecker.set_photoshop(self.mw)
         else:
             load_key_to_api('PS_PATH', '')
+            conf['PS_PATH'] = ''
             self.mw.lineEdit_psPath.setText('')
             PhotoshopChecker.set_photoshop(self.mw)
 
@@ -36,7 +38,6 @@ class PSSelect:
         PhotoshopChecker.set_photoshop(self.mw)
 
     def select_ps(self):
-        conf = load_api_keys()
         folder_path = QFileDialog.getOpenFileName(
             self.mw, 'Установите путь к Photoshop', conf['PS_PATH'], 'Photoshop.exe *.exe')
         if folder_path:

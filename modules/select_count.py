@@ -1,5 +1,4 @@
-from modules import conf
-from modules.api import load_api_keys, load_key_to_api
+from modules.api import load_key_to_api, conf
 
 
 class SelectCount:
@@ -14,5 +13,6 @@ class SelectCount:
             self.choose_shortcut)
 
     def choose_shortcut(self):
-        load_key_to_api('COUNT', int(
-            self.mw.comboBox_howMuch.currentText()))
+        c = int(self.mw.comboBox_howMuch.currentText())
+        load_key_to_api('COUNT', c)
+        conf['COUNT'] = c

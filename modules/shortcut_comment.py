@@ -1,4 +1,4 @@
-from modules.api import load_api_keys, load_key_to_api, conf
+from modules.api import load_key_to_api, conf
 from PyQt5 import QtCore
 
 
@@ -21,6 +21,7 @@ class Shortcut_Comment:
         self.mw.comboBox_shortcut.model().item(self.last_index).setEnabled(True)
         load_key_to_api('SHORTCUT_COMMENT',
                         self.mw.comboBox_shortcut_comment.currentText())
+        conf['SHORTCUT_COMMENT'] = self.mw.comboBox_shortcut_comment.currentText()
         self.last_index = self.mw.comboBox_shortcut_comment.findText(
             self.mw.comboBox_shortcut_comment.currentText())
         self.mw.comboBox_shortcut.model().item(self.last_index).setEnabled(False)

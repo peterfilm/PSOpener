@@ -1,5 +1,4 @@
-from modules import conf
-from modules.api import load_api_keys, load_key_to_api
+from modules.api import load_key_to_api, conf
 
 
 class LoggingPlace:
@@ -21,14 +20,16 @@ class LoggingPlace:
             self.radio_selected)
 
     def radio_selected(self):
-        conf = load_api_keys()
         radio_btn = self.mw.sender()
         if radio_btn.isChecked():
             load_key_to_api('LOGGING_PLACE', 0)
+            conf['LOGGING_PLACE'] = 0
             self.mw.lineEdit_comment.setEnabled(False)
             self.mw.pushButton_comment.setEnabled(False)
             load_key_to_api('COMMENT_PATH', conf['LAST_PATH'])
+            conf['COMMENT_PATH'] = conf['LAST_PATH']
         else:
             load_key_to_api('LOGGING_PLACE', 1)
+            conf['LOGGING_PLACE'] = 1
             self.mw.lineEdit_comment.setEnabled(True)
             self.mw.pushButton_comment.setEnabled(True)

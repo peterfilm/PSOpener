@@ -1,7 +1,6 @@
-from modules import conf
+from modules.api import conf
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtCore import QUrl
-from modules.api import load_api_keys, load_key_to_api
 import os
 import subprocess
 from modules._checker import Checker

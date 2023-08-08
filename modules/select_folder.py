@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QFileDialog, QListWidgetItem, QMessageBox
 import os
 from PyQt5 import QtCore
-from modules.api import conf, load_key_to_api, load_api_keys
+from modules.api import conf, load_key_to_api
 import re
 from modules._checker import Checker
 
@@ -54,7 +54,6 @@ class Selector(QtCore.QThread):
         self.lst = []
 
     def change_folder(self, folder_path):
-        conf = load_api_keys()
         try:
             if conf['THROUGH_FOLDERS'] == 0:
                 files_with_extension = get_files_by_extension(
@@ -84,7 +83,7 @@ class ChooseFolder:
     def __init__(self, main_window):
         self.mw = main_window
         load_key_to_api('LAST_PATH', '')
-        conf = load_api_keys()
+        conf['LAST_PATH'] = ''
         Checker.DISABLER = 0
         Checker.checker(self.mw)
 
@@ -103,10 +102,10 @@ class ChooseFolder:
         self.mw.lineEdit_choisePhotos.setText(folder_path)
         self.mythread.start()
         load_key_to_api('LAST_PATH', folder_path)
+        conf['LAST_PATH'] = folder_path
         Checker.checker(self.mw)
 
     def select_folder(self):
-        conf = load_api_keys()
         folder_path = QFileDialog.getExistingDirectory(
             self.mw, 'Выберите папку', conf['LAST_PATH'])
         if folder_path:
@@ -119,6 +118,7 @@ class ChooseFolder:
             self.mw.lineEdit_choisePhotos.setText(folder_path)
             self.mythread.start()
             load_key_to_api('LAST_PATH', folder_path)
+            conf['LAST_PATH'] = folder_path
 
     def on_started(self):
         self.mw.label_pathSelectedPhoto.setText('загружаю базу...')

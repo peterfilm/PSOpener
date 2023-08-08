@@ -40,7 +40,7 @@ class PSOpener(QWidget, UI):
 
 def on_press(key):
     try:
-        if key == keyboard.Key.f12:
+        if key == keys[conf['SHORTCUT']]:
             window.pshop.count_open()
     except AttributeError:
         pass
@@ -53,7 +53,3 @@ if __name__ == "__main__":
     window.show()
     with keyboard.Listener(on_press=on_press) as listener:
         sys.exit(app.exec_())
-
-# app = QApplication(sys.argv)
-# Note = PSOpener()
-# sys.exit(app.exec_())
