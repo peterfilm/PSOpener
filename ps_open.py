@@ -1,7 +1,9 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget
+from PyQt5.QtCore import Qt, QThread, pyqtSignal
 import sys
 from pynput import keyboard
 from data.design import UI
+from data.design_comment_window import UiComment
 from modules import *
 
 
@@ -37,19 +39,46 @@ class PSOpener(QWidget, UI):
         self.btns = ButtonsFile(self)  # кнопки под фоткой
         self.pshop = Photoshop(self)  # механизм открытия в фотошоп
 
+        # окошко для комментария
+        self.pushButton_oneComment.clicked.connect(self.open_modal_comment)
 
-def on_press(key):
-    try:
-        if key == keys[conf['SHORTCUT']]:
-            window.pshop.count_open()
-    except AttributeError:
-        pass
+    def open_modal_comment(self):
+        modal = CommentWindow()
+        modal.setWindowFlags(modal.windowFlags() | Qt.Window)
+        modal.exec_()
+
+
+class ListenerThread(QThread):
+    shortcut_pressed = pyqtSignal(str)
+
+    def __init__(self, shortcut):
+        super().__init__()
+        self.shortcut = shortcut
+
+    def run(self):
+        with keyboard.Listener(on_press=self.on_press) as listener:
+            listener.join()
+
+    def on_press(self, key):
+        try:
+            if key == keys[self.shortcut]:
+                self.shortcut_pressed.emit(self.shortcut)
+        except AttributeError:
+            pass
 
 
 if __name__ == "__main__":
-    # Start the pynput listener
     app = QApplication(sys.argv)
     window = PSOpener()
     window.show()
-    with keyboard.Listener(on_press=on_press) as listener:
-        sys.exit(app.exec_())
+
+    shortcut_thread = ListenerThread(conf['SHORTCUT'])
+    comment_shortcut_thread = ListenerThread(conf['SHORTCUT_COMMENT'])
+
+    shortcut_thread.shortcut_pressed.connect(window.pshop.count_open)
+    comment_shortcut_thread.shortcut_pressed.connect(window.open_modal_comment)
+
+    shortcut_thread.start()
+    comment_shortcut_thread.start()
+
+    sys.exit(app.exec_())

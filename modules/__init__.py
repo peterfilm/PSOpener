@@ -13,6 +13,7 @@ from modules.selected_extensions import ChoseExtensions
 from modules.list_viewer import ListViewer
 from modules.buttons_file import ButtonsFile
 from modules.photoshop import Photoshop
+from modules.comment_window import CommentWindow
 
 # Дополнительные функции
 from modules.api import load_key_to_api
