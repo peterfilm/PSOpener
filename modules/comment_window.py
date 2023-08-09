@@ -6,6 +6,7 @@ from PyQt5.QtCore import Qt, QTimer
 from modules.api import conf, keys
 import pygetwindow as gw
 from modules._isphotoshop import is_photoshop_active
+from modules._write_logs import write_log
 
 
 def activate_window_by_title(window_title):
@@ -27,7 +28,6 @@ class CommentWindow(QDialog, UiComment):
         self.mw = parent
         self.setupUi(self)
         self.show()
-        print(gw.getAllTitles())
         self.setWindowFlags(self.windowFlags() |
                             Qt.WindowStaysOnTopHint)
         self.setWindowModality(Qt.ApplicationModal)  # Set modal behavior
@@ -45,7 +45,7 @@ class CommentWindow(QDialog, UiComment):
         if self.lineEdit_comment.text():
             if self.returnto != conf['PROGRAM_NAME']:
                 activate_window_by_title(self.returnto)
-            print('accept')
+            write_log(self.label_name.text(), self.lineEdit_comment.text())
             self.accept()
         else:
             QMessageBox.warning(
@@ -54,5 +54,4 @@ class CommentWindow(QDialog, UiComment):
     def simple_close(self):
         if self.returnto != 'PS Opener':
             activate_window_by_title(self.returnto)
-        print('close')
         self.close()
