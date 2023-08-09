@@ -9,6 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QCursor
+from modules._text_selectable_label import TextSelectableLabel
 
 
 class UiComment(object):
@@ -51,7 +54,7 @@ class UiComment(object):
         font.setPointSize(10)
         self.label.setFont(font)
         self.label.setObjectName("label")
-        self.label_name = QtWidgets.QLabel(CommentOfUser)
+        self.label_name = TextSelectableLabel(CommentOfUser)
         self.label_name.setGeometry(QtCore.QRect(30, 10, 711, 20))
         font = QtGui.QFont()
         font.setPointSize(10)

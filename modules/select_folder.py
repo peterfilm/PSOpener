@@ -22,7 +22,8 @@ def get_files_by_extension(folder_path, extensions):
     for file in os.listdir(folder_path):
         for extension in extensions:
             if file.lower().endswith(extension):
-                absolute_paths.append('/'.join([folder_path, file]))
+                absolute_paths.append(
+                    '/'.join([folder_path, file]).replace('//', '/'))
                 break
     return sorted(absolute_paths, key=natural_sort_key)
 
@@ -37,7 +38,7 @@ def get_files_all_folders(folder_path, extensions):
             for extension in extensions:
                 if file.lower().endswith(extension):
                     absolute_paths.append(
-                        '/'.join([root, file]).replace('\\', '/'))
+                        '/'.join([root, file]).replace('\\', '/').replace('//', '/'))
                     break
     return sorted(absolute_paths, key=natural_sort_key)
 

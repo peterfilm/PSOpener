@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QDialog
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QDialog, QMessageBox
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QEvent
 import sys
 from pynput import keyboard
@@ -44,16 +44,14 @@ class PSOpener(QWidget, UI):
         self.pushButton_oneComment.clicked.connect(self.open_modal_comment)
 
     def open_modal_comment(self):
-        modal = CommentWindow(self)
-        modal.show()
-
-    # def event(self, event):
-    #     # Override event function to keep the window running in the background
-    #     if event.type() == QEvent.WindowStateChange and self.isMinimized():
-    #         self.hide()  # Hide the window when it's minimized
-    #         event.ignore()  # Ignore the event to prevent closing the application
-    #         return True
-    #     return super().event(event)
+        # модальное окно для комментария
+        if is_photoshop_active:
+            if self.listWidget.currentItem() or gw.getActiveWindow().title != conf['PROGRAM_NAME']:
+                modal = CommentWindow(self)
+                modal.show()
+            else:
+                QMessageBox.information(
+                    self, 'Нет фото', 'Выберите фото для комментирования')
 
 
 class ListenerThread(QThread):
