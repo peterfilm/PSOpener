@@ -4,7 +4,6 @@ import sys
 from PyQt5.QtGui import QIcon
 from pynput import keyboard
 from data.design import UI
-from data.design_comment_window import UiComment
 from modules import *
 import pygetwindow as gw
 # from style import *
@@ -19,6 +18,7 @@ class PSOpener(QWidget, UI):
         super().__init__()
         self.setupUi(self)
         icon = QIcon("img/icon.png")
+        self.load_qss("style.qss")  # подгружаем стили
         self.setWindowIcon(icon)
         self.show()
 
@@ -46,8 +46,8 @@ class PSOpener(QWidget, UI):
 
         # окошко для комментария
         self.pushButton_oneComment.clicked.connect(self.open_modal_comment)
-
-        self.load_qss("style.qss")
+        # для окошка об авторе
+        self.pushButton_about.clicked.connect(self.open_modal_author)
 
     def load_qss(self, filename):
         qss_file = QFile(filename)
@@ -55,6 +55,10 @@ class PSOpener(QWidget, UI):
             stream = QTextStream(qss_file)
             self.setStyleSheet(stream.readAll())
             qss_file.close()
+
+    def open_modal_author(self):
+        modal_dialog = PeterWindow(self)
+        modal_dialog.exec_()
 
     def open_modal_comment(self):
         # модальное окно для комментария

@@ -14,6 +14,7 @@ from modules.list_viewer import ListViewer
 from modules.buttons_file import ButtonsFile
 from modules.photoshop import Photoshop
 from modules.comment_window import CommentWindow
+from modules.peter import PeterWindow
 
 # Дополнительные функции
 from modules.api import load_key_to_api

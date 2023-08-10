@@ -1,5 +1,5 @@
 {
-  "PS_PATH": "C:/Program Files/Adobe/Adobe Photoshop CC 2019/Photoshop.exe",
+  "PS_PATH": "",
   "COMMENT_PATH": "",
   "LOG_PATH": "",
   "SHORTCUT": "F12",
@@ -9,17 +9,7 @@
   "THROUGH_FOLDERS": 0,
   "LOGGING_PLACE": 0,
   "PHOTOSHOP_NAME": "Photoshop.exe",
-  "SELECTED_EXTENSIONS": [
-    ".jpeg",
-    ".jpg",
-    ".jpe",
-    ".tiff",
-    ".tif",
-    ".png",
-    ".psd",
-    ".pdd",
-    ".psdt"
-  ],
+  "SELECTED_EXTENSIONS": [],
   "RAWS": [
     ".cr2",
     ".ari",
@@ -73,5 +63,5 @@
     ".tiff",
     ".tif"
   ],
-  "LAST_PATH": "D:/"
+  "LAST_PATH": ""
 }
