@@ -1,4 +1,3 @@
-from modules.api import conf
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtCore import QUrl
 import os

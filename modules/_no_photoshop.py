@@ -1,6 +1,3 @@
-from PyQt5.QtGui import QCursor, QPixmap
-from PyQt5.QtCore import Qt, QCoreApplication
-from PyQt5.QtWidgets import QMessageBox
 from modules.api import conf
 
 

@@ -1,6 +1,5 @@
 from PyQt5.QtWidgets import QDialog
 from data.peter import PeterUI
-from PyQt5.QtCore import Qt
 
 
 class PeterWindow(QDialog):

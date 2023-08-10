@@ -1,11 +1,8 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QLabel, QMessageBox
-import sys
-from pynput import keyboard
+from PyQt5.QtWidgets import QDialog, QMessageBox
 from data.design_comment_window import UiComment
-from PyQt5.QtCore import Qt, QTimer
-from modules.api import conf, keys
+from PyQt5.QtCore import Qt
+from modules.api import conf
 import pygetwindow as gw
-from modules._isphotoshop import is_photoshop_active
 from modules._write_logs import write_log
 
 

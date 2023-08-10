@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from modules.api import conf, load_key_to_api
 from modules._no_photoshop import PhotoshopChecker
 

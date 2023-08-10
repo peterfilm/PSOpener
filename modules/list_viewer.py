@@ -1,7 +1,7 @@
 from modules.api import conf
-from PyQt5.QtGui import QPixmap, QImageReader, QImage, QCursor
-from PyQt5.QtCore import Qt, QCoreApplication, pyqtSignal
-from PyQt5.QtWidgets import QApplication, QLabel
+from PyQt5.QtGui import QPixmap, QImageReader, QImage
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication
 import rawpy
 
 

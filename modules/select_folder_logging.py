@@ -1,5 +1,4 @@
-from PyQt5.QtWidgets import QFileDialog, QListWidgetItem
-import os
+from PyQt5.QtWidgets import QFileDialog
 from modules.api import conf, load_key_to_api
 
 

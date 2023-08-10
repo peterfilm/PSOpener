@@ -1,7 +1,5 @@
 import subprocess
 from modules.api import conf
-from modules._no_photoshop import PhotoshopChecker
-import time
 from modules._checker import Checker
 
 
