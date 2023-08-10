@@ -1,11 +1,13 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QDialog, QMessageBox
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QEvent
+from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QEvent, QFile, QTextStream
 import sys
+from PyQt5.QtGui import QIcon
 from pynput import keyboard
 from data.design import UI
 from data.design_comment_window import UiComment
 from modules import *
 import pygetwindow as gw
+# from style import *
 
 
 class PSOpener(QWidget, UI):
@@ -16,6 +18,8 @@ class PSOpener(QWidget, UI):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        icon = QIcon("img/icon.png")
+        self.setWindowIcon(icon)
         self.show()
 
         # кнопки
@@ -42,6 +46,15 @@ class PSOpener(QWidget, UI):
 
         # окошко для комментария
         self.pushButton_oneComment.clicked.connect(self.open_modal_comment)
+
+        self.load_qss("style.qss")
+
+    def load_qss(self, filename):
+        qss_file = QFile(filename)
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stream = QTextStream(qss_file)
+            self.setStyleSheet(stream.readAll())
+            qss_file.close()
 
     def open_modal_comment(self):
         # модальное окно для комментария

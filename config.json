@@ -5,7 +5,7 @@
   "SHORTCUT": "F12",
   "PROGRAM_NAME": "PS Opener",
   "SHORTCUT_COMMENT": "F11",
-  "COUNT": 3,
+  "COUNT": 5,
   "THROUGH_FOLDERS": 0,
   "LOGGING_PLACE": 0,
   "PHOTOSHOP_NAME": "Photoshop.exe",
@@ -13,7 +13,12 @@
     ".jpeg",
     ".jpg",
     ".jpe",
-    ".png"
+    ".tiff",
+    ".tif",
+    ".png",
+    ".psd",
+    ".pdd",
+    ".psdt"
   ],
   "RAWS": [
     ".cr2",
@@ -68,5 +73,5 @@
     ".tiff",
     ".tif"
   ],
-  "LAST_PATH": "E:/\u0424\u043e\u0442\u043e\u0441\u0435\u0442\u044b/Other"
+  "LAST_PATH": "D:/"
 }

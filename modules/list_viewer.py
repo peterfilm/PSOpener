@@ -31,22 +31,26 @@ class ListViewer:
         self.mw.label_photos.setAlignment(Qt.AlignCenter)
 
     def open_raw(self, item):
-        with rawpy.imread(item) as raw:
-            rgb = raw.postprocess(use_camera_wb=True,
-                                  output_bps=8, half_size=True)
+        try:
+            with rawpy.imread(item) as raw:
+                rgb = raw.postprocess(use_camera_wb=True,
+                                      output_bps=8, half_size=True)
 
-        # Convert the raw image data to QImage
-        height, width, channel = rgb.shape
-        q_image = QImage(rgb, width, height,
-                         width * 3, QImage.Format_RGB888)
+            # Convert the raw image data to QImage
+            height, width, channel = rgb.shape
+            q_image = QImage(rgb, width, height,
+                             width * 3, QImage.Format_RGB888)
 
-        desired_height = 350
-        q_image = q_image.scaledToHeight(desired_height)
+            desired_height = 350
+            q_image = q_image.scaledToHeight(desired_height)
 
-        pixmap = QPixmap.fromImage(q_image)
-        pixmap = pixmap.scaled(312, 350, aspectRatioMode=Qt.KeepAspectRatio)
-        self.mw.label_photos.setPixmap(pixmap)
-        self.mw.label_photos.setAlignment(Qt.AlignCenter)
+            pixmap = QPixmap.fromImage(q_image)
+            pixmap = pixmap.scaled(
+                312, 350, aspectRatioMode=Qt.KeepAspectRatio)
+            self.mw.label_photos.setPixmap(pixmap)
+            self.mw.label_photos.setAlignment(Qt.AlignCenter)
+        except:
+            self.change_photo('img/nophoto.jpg')
 
     def clicked(self, item):
         if item:
