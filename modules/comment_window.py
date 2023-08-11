@@ -4,6 +4,7 @@ from PyQt5.QtCore import Qt
 from modules.api import conf
 import pygetwindow as gw
 from modules._write_logs import write_log
+import os
 
 
 def activate_window_by_title(window_title):
@@ -32,11 +33,11 @@ class CommentWindow(QDialog, UiComment):
         self.returnto = gw.getActiveWindow().title
         self.pushButton_cancel.clicked.connect(self.simple_close)
         self.lineEdit_comment.setFocus()
-
         if self.returnto == conf['PROGRAM_NAME']:
             self.label_name.setText(self.mw.listWidget.currentItem().value)
         else:
-            self.label_name.setText(self.returnto.split(' @')[0])
+            self.label_name.setText(
+                os.path.normpath(os.path.join(parent.lineEdit_choisePhotos.text(), self.returnto.split(' @')[0])))
 
     def close_and_activate(self):
         if self.lineEdit_comment.text():

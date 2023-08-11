@@ -1,12 +1,12 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QDialog, QMessageBox
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QEvent, QFile, QTextStream
+from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
+from PyQt5.QtCore import QThread, pyqtSignal
 import sys
 from PyQt5.QtGui import QIcon
 from pynput import keyboard
 from data.design import UI
 from modules import *
 import pygetwindow as gw
-# from style import *
+import os
 
 
 class PSOpener(QWidget, UI):
@@ -16,10 +16,21 @@ class PSOpener(QWidget, UI):
 
     def __init__(self):
         super().__init__()
+        # грузим qss в файл
+        try:
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            qss_file_path = os.path.join(script_dir, "style.qss")
+            with open(qss_file_path, "r") as qss_file:
+                qss_content = qss_file.read()
+
+            # Apply the QSS to your application
+            self.setStyleSheet(qss_content)
+        except Exception as e:
+            print(e)
         self.setupUi(self)
-        icon = QIcon("img/icon.png")
-        self.load_qss("style.qss")  # подгружаем стили
+        icon = QIcon(os.path.join("img", "icon.png"))
         self.setWindowIcon(icon)
+
         self.show()
 
         # кнопки
@@ -48,13 +59,6 @@ class PSOpener(QWidget, UI):
         self.pushButton_oneComment.clicked.connect(self.open_modal_comment)
         # для окошка об авторе
         self.pushButton_about.clicked.connect(self.open_modal_author)
-
-    def load_qss(self, filename):
-        qss_file = QFile(filename)
-        if qss_file.open(QFile.ReadOnly | QFile.Text):
-            stream = QTextStream(qss_file)
-            self.setStyleSheet(stream.readAll())
-            qss_file.close()
 
     def open_modal_author(self):
         modal_dialog = PeterWindow(self)
@@ -93,6 +97,7 @@ class ListenerThread(QThread):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = PSOpener()
+
     window.show()
 
     shortcut_thread = ListenerThread(conf['SHORTCUT'])

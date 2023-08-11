@@ -22,8 +22,7 @@ def get_files_by_extension(folder_path, extensions):
     for file in os.listdir(folder_path):
         for extension in extensions:
             if file.lower().endswith(extension):
-                absolute_paths.append(
-                    '/'.join([folder_path, file]).replace('//', '/'))
+                absolute_paths.append(os.path.join(folder_path, file))
                 break
     return sorted(absolute_paths, key=natural_sort_key)
 
@@ -37,8 +36,7 @@ def get_files_all_folders(folder_path, extensions):
         for file in files:
             for extension in extensions:
                 if file.lower().endswith(extension):
-                    absolute_paths.append(
-                        '/'.join([root, file]).replace('\\', '/').replace('//', '/'))
+                    absolute_paths.append(os.path.join(root, file))
                     break
     return sorted(absolute_paths, key=natural_sort_key)
 
@@ -64,9 +62,9 @@ class Selector(QtCore.QThread):
                     folder_path, conf['SELECTED_EXTENSIONS'])
             for file in files_with_extension:
                 if file is not None:
-                    file_name = file.split('/')[-1]
+                    file_name = os.path.basename(file)
                     item = QListWidgetItem(file_name)
-                    item.value = file
+                    item.value = os.path.normpath(file)
                 self.lst.append(item)
         except Exception as e:
             print(e)
@@ -103,7 +101,7 @@ class ChooseFolder:
         self.mw.lineEdit_choisePhotos.setText(folder_path)
         self.mythread.start()
         load_key_to_api('LAST_PATH', folder_path)
-        conf['LAST_PATH'] = folder_path
+        conf['LAST_PATH'] = os.path.normpath(folder_path)
         Checker.checker(self.mw)
 
     def select_folder(self):
@@ -119,7 +117,7 @@ class ChooseFolder:
             self.mw.lineEdit_choisePhotos.setText(folder_path)
             self.mythread.start()
             load_key_to_api('LAST_PATH', folder_path)
-            conf['LAST_PATH'] = folder_path
+            conf['LAST_PATH'] = os.path.normpath(folder_path)
 
     def on_started(self):
         self.mw.label_pathSelectedPhoto.setText('загружаю базу...')

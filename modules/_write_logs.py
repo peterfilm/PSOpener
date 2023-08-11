@@ -1,4 +1,5 @@
 from modules import conf
+import os
 
 from datetime import datetime
 
@@ -8,13 +9,13 @@ formatted_datetime = current_datetime.strftime("%Y.%m.%d - %H:%M")
 
 def write_log(filename_path, text):
     if conf['COMMENT_PATH']:
-        path = conf['COMMENT_PATH'] + '/log.txt'
+        path = os.path.join(conf['COMMENT_PATH'], 'log.txt')
     else:
-        path = conf['LAST_PATH'] + '/log.txt'
+        path = os.path.join(conf['LAST_PATH'], 'log.txt')
     try:
         with open(path, 'a') as file:
-            filename = filename_path.split('/')[-1]
+            filename = os.path.normpath(filename_path)
             file.write(
-                f"{formatted_datetime}\n{filename} - {text} ({filename_path})\n\n")
+                f"{formatted_datetime}\n{os.path.basename(filename)} - {text} ({os.path.normpath(filename_path)})\n\n")
     except Exception as e:
         print(f"Ошибка: {e}")

@@ -3,6 +3,7 @@ from PyQt5.QtGui import QPixmap, QImageReader, QImage
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication
 import rawpy
+import os
 
 
 class ListViewer:
@@ -50,7 +51,7 @@ class ListViewer:
             self.mw.label_photos.setPixmap(pixmap)
             self.mw.label_photos.setAlignment(Qt.AlignCenter)
         except:
-            self.change_photo('img/nophoto.jpg')
+            self.change_photo(os.path.join("img", "nophoto.jpg"))
 
     def clicked(self, item):
         if item:
@@ -59,14 +60,16 @@ class ListViewer:
             frmt = item.value.split('.')[-1].lower()
             if frmt in self.PIXMAP_FORMATS:
                 try:
-                    pass
                     self.change_photo(item.value)
                 except:
-                    self.change_photo('img/nophoto.jpg')
+                    self.change_photo(os.path.join("img", "nophoto.jpg"))
             elif '.' + frmt in conf['RAWS']:
-                self.open_raw(item.value)
+                try:
+                    self.open_raw(item.value)
+                except:
+                    self.change_photo(os.path.join("img", "nophoto.jpg"))
             else:
-                self.change_photo('img/nophoto.jpg')
+                self.change_photo(os.path.join("img", "nophoto.jpg"))
 
     def buffer(self):
         # копировать текст в буффер обмена

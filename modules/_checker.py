@@ -1,5 +1,6 @@
 from PyQt5.QtGui import QCursor, QPixmap
 from PyQt5.QtCore import Qt, QCoreApplication
+import os
 
 
 class Checker:
@@ -26,7 +27,7 @@ class Checker:
                 "Form", "<html><head/><body><p>Копировать путь к файлу</p></body></html>"))
         elif self.listWidget.count() == 0 or self.lineEdit_psPath.text() == '':
             Checker.DISABLER = 1
-            pixmap = QPixmap("img/willbephoto.jpg")
+            pixmap = QPixmap(os.path.join("img", "willbephoto.jpg"))
             self.label_photos.setPixmap(pixmap)
             self.label_pathSelectedPhoto.setCursor(
                 QCursor(Qt.ArrowCursor))

@@ -1,4 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from modules._text_selectable_label import TextSelectableLabel
+import os
 
 
 class ClickableLinkLabel(QtWidgets.QLabel):
@@ -28,7 +30,8 @@ class PeterUI(object):
         self.qlabel_peterphoto.setMaximumSize(QtCore.QSize(151, 151))
         self.qlabel_peterphoto.setStyleSheet("")
         self.qlabel_peterphoto.setText("")
-        self.qlabel_peterphoto.setPixmap(QtGui.QPixmap("img/pm.png"))
+        self.qlabel_peterphoto.setPixmap(
+            QtGui.QPixmap(os.path.join("img", "pm.png")))
         self.qlabel_peterphoto.setObjectName("qlabel_peterphoto")
         self.verticalLayout.addWidget(self.qlabel_peterphoto)
         self.horizontalLayout.addLayout(self.verticalLayout)
@@ -66,7 +69,7 @@ class PeterUI(object):
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.verticalLayout_2.addWidget(self.label_3)
-        self.label_4 = QtWidgets.QLabel(self.widget)
+        self.label_4 = TextSelectableLabel(self.widget)
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)

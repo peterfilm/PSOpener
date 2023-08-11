@@ -2,3 +2,7 @@ __pycache__/
 .vscode/
 probas/
 venv/
+ps_open.exe
+dist/
+build/
+ps_open.spec
