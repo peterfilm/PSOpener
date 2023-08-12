@@ -7,7 +7,7 @@ current_datetime = datetime.now()
 formatted_datetime = current_datetime.strftime("%Y.%m.%d - %H:%M")
 
 
-def write_log(filename_path, text):
+def write_log(filename_path, text, flag):
     if conf['COMMENT_PATH']:
         path = os.path.join(conf['COMMENT_PATH'], 'log.txt')
     else:
@@ -15,7 +15,11 @@ def write_log(filename_path, text):
     try:
         with open(path, 'a') as file:
             filename = os.path.normpath(filename_path)
-            file.write(
-                f"{formatted_datetime}\n{os.path.basename(filename)} - {text} ({os.path.normpath(filename_path)})\n\n")
+            if not flag:
+                file.write(
+                    f"{formatted_datetime}\n{os.path.basename(filename)} - {text} \n\n")
+            else:
+                file.write(
+                    f"{formatted_datetime}\n{os.path.basename(filename)} - {text} ({os.path.normpath(filename_path)})\n\n")
     except Exception as e:
         print(f"Ошибка: {e}")

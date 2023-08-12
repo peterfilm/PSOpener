@@ -24,10 +24,11 @@ class PSSelect:
 
     def check_link(self, link):
         if link and conf['PHOTOSHOP_NAME'] == os.path.basename(link):
-            self.mw.lineEdit_psPath.setText(link)
-            load_key_to_api('PS_PATH', link)
-            conf['PS_PATH'] = os.path.normpath(link)
-            PhotoshopChecker.set_photoshop(self.mw)
+            if os.path.exists(link):
+                self.mw.lineEdit_psPath.setText(link)
+                load_key_to_api('PS_PATH', link)
+                conf['PS_PATH'] = os.path.normpath(link)
+                PhotoshopChecker.set_photoshop(self.mw)
         else:
             load_key_to_api('PS_PATH', '')
             conf['PS_PATH'] = ''

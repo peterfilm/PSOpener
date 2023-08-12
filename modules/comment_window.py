@@ -33,17 +33,26 @@ class CommentWindow(QDialog, UiComment):
         self.returnto = gw.getActiveWindow().title
         self.pushButton_cancel.clicked.connect(self.simple_close)
         self.lineEdit_comment.setFocus()
+        self.path = 0
         if self.returnto == conf['PROGRAM_NAME']:
             self.label_name.setText(self.mw.listWidget.currentItem().value)
+            self.path = 1
         else:
-            self.label_name.setText(
-                os.path.normpath(os.path.join(parent.lineEdit_choisePhotos.text(), self.returnto.split(' @')[0])))
+            link = os.path.normpath(os.path.join(
+                parent.lineEdit_choisePhotos.text(), self.returnto.split(' @')[0]))
+            if os.path.exists(link):
+                self.label_name.setText(link)
+                self.path = 1
+            else:
+                self.label_name.setText(self.returnto.split(' @')[0])
+                self.path = 0
 
     def close_and_activate(self):
         if self.lineEdit_comment.text():
             if self.returnto != conf['PROGRAM_NAME']:
                 activate_window_by_title(self.returnto)
-            write_log(self.label_name.text(), self.lineEdit_comment.text())
+            write_log(self.label_name.text(),
+                      self.lineEdit_comment.text(), self.path)
             self.accept()
         else:
             QMessageBox.warning(
