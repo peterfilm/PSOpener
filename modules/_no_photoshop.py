@@ -1,4 +1,5 @@
 from modules.api import conf
+import os
 
 
 class PhotoshopChecker:
@@ -40,7 +41,8 @@ class PhotoshopChecker:
         PhotoshopChecker.disabler(self, PhotoshopChecker.ISPHOTOSHOP)
 
     def check_photoshop(self):
-        if conf['PS_PATH']:
+        if conf['PS_PATH'] and os.path.exists(conf['PS_PATH']):
+            print('asd')
             return True
         else:
             return False

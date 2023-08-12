@@ -14,9 +14,11 @@ class PSSelect:
         self.mw = main_window
 
         PhotoshopChecker.set_photoshop(self.mw)
-        if not conf['PS_PATH']:
+        if not conf['PS_PATH'] or not os.path.exists(conf['PS_PATH']):
             QMessageBox.information(
                 self.mw, 'Укажите путь к Photoshop', 'Укажите правильный путь к Photoshop.exe')
+            conf['PS_PATH'] = ''
+            load_key_to_api('PS_PATH', '')
 
         self.mw.toolButton_psPath.clicked.connect(self.select_ps)
         self.mw.lineEdit_psPath.setText(conf['PS_PATH'])
