@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from modules._clicable_label import ClickableLabel
+from modules.api import conf
 
 
 class UI(object):
@@ -403,7 +404,7 @@ class UI(object):
         self.pushButton_oneOpenPs.setText(
             _translate("Form", "Открыть в Photoshop"))
         self.pushButton_oneOpenPs.setShortcut(
-            _translate("Form", "Ctrl+P, Ctrl+S"))
+            _translate("Form", "Ctrl+P"))
         self.pushButton_oneOpenFolder.setToolTip(_translate(
             "Form", "<html><head/><body><p>Горячая клавиша: Ctrl + F</p></body></html>"))
         self.pushButton_oneOpenFolder.setText(
@@ -418,7 +419,7 @@ class UI(object):
         self.pushButton_oneDelete.setText(_translate("Form", "Убрать"))
         self.pushButton_oneDelete.setShortcut(_translate("Form", "-"))
         self.pushButton_oneComment.setToolTip(_translate(
-            "Form", "<html><head/><body><p>Горячая клавиша: /</p></body></html>"))
+            "Form", f"<html><head/><body><p>Горячая клавиша: {conf['SHORTCUT_COMMENT']}</p></body></html>"))
         self.pushButton_oneComment.setText(_translate("Form", "Комментарий"))
         self.pushButton_oneComment.setShortcut(_translate("Form", "/"))
         self.pushButton_about.setText(_translate("Form", "?"))

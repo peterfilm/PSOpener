@@ -22,6 +22,9 @@ class Shortcut_Comment:
         load_key_to_api('SHORTCUT_COMMENT',
                         self.mw.comboBox_shortcut_comment.currentText())
         conf['SHORTCUT_COMMENT'] = self.mw.comboBox_shortcut_comment.currentText()
+        _translate = QtCore.QCoreApplication.translate
+        self.mw.pushButton_oneComment.setToolTip(_translate(
+            "Form", f"<html><head/><body><p>Горячая клавиша: {conf['SHORTCUT_COMMENT']}</p></body></html>"))
         self.last_index = self.mw.comboBox_shortcut_comment.findText(
             self.mw.comboBox_shortcut_comment.currentText())
         self.mw.comboBox_shortcut.model().item(self.last_index).setEnabled(False)

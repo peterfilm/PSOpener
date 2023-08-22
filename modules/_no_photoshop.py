@@ -42,7 +42,6 @@ class PhotoshopChecker:
 
     def check_photoshop(self):
         if conf['PS_PATH'] and os.path.exists(conf['PS_PATH']):
-            print('asd')
             return True
         else:
             return False
