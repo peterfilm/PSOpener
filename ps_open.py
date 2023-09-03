@@ -28,7 +28,7 @@ class PSOpener(QWidget, UI):
         except Exception as e:
             print(e)
         self.setupUi(self)
-        icon = QIcon(os.path.join("img", "icon.png"))
+        icon = QIcon(os.path.join("img", "icon.ico"))
         self.setWindowIcon(icon)
 
         self.show()
