@@ -15,6 +15,8 @@ from modules.buttons_file import ButtonsFile
 from modules.photoshop import Photoshop
 from modules.comment_window import CommentWindow
 from modules.peter import PeterWindow
+from modules.save_list import SaveList
+from modules.select_photos import SelectPhotos
 
 # Дополнительные функции
 from modules.api import load_key_to_api

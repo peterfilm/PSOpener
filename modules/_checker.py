@@ -1,6 +1,7 @@
 from PyQt5.QtGui import QCursor, QPixmap
 from PyQt5.QtCore import Qt, QCoreApplication
 import os
+from modules._ending_word import ending_count
 
 
 class Checker:
@@ -11,6 +12,7 @@ class Checker:
 
     def disabler(self, value):
         self.pushButton_allOpen.setDisabled(value)
+        self.pushButton_saveList.setDisabled(value)
         self.pushButton_oneOpen.setDisabled(value)
         self.pushButton_oneDelete.setDisabled(value)
         self.pushButton_oneComment.setDisabled(value)
@@ -25,7 +27,9 @@ class Checker:
                 QCursor(Qt.PointingHandCursor))
             self.label_pathSelectedPhoto.setToolTip(_translate(
                 "Form", "<html><head/><body><p>Копировать путь к файлу</p></body></html>"))
+            self.label_countPhotos.setText(ending_count(self.listWidget.count()))
         elif self.listWidget.count() == 0 or self.lineEdit_psPath.text() == '':
+            self.label_countPhotos.setText('')
             Checker.DISABLER = 1
             pixmap = QPixmap(os.path.join("img", "willbephoto.jpg"))
             self.label_photos.setPixmap(pixmap)

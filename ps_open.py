@@ -54,11 +54,14 @@ class PSOpener(QWidget, UI):
         self.lw = ListViewer(self)  # главный List Viewer
         self.btns = ButtonsFile(self)  # кнопки под фоткой
         self.pshop = Photoshop(self)  # механизм открытия в фотошоп
+        self.save_list = SaveList(self) # кнопка сохранения списка
+        self.select_photos = SelectPhotos(self) # кнопка выбора произвольных фотографий
 
         # окошко для комментария
         self.pushButton_oneComment.clicked.connect(self.open_modal_comment)
         # для окошка об авторе
         self.pushButton_about.clicked.connect(self.open_modal_author)
+        # кнопка сохранения списка
 
     def open_modal_author(self):
         modal_dialog = PeterWindow(self)

@@ -18,6 +18,10 @@ class PhotoshopChecker:
         self.radioButton_commentChoise.setEnabled(value)
         self.lineEdit_choisePhotos.setEnabled(value)
         self.pushButton_choisePhotos.setEnabled(value)
+        self.pushButton_choiseYourPhotos.setEnabled(value)
+        self.pushButton_choiseYourPhotos.setEnabled(value)
+        self.pushButton_choiseYourPhotos_2.setEnabled(value)
+        self.pushButton_choiseYourPhotos_2.setEnabled(value)
 
         if self.listWidget.count() != 0:
             self.pushButton_allOpen.setEnabled(value)
@@ -26,6 +30,7 @@ class PhotoshopChecker:
             self.pushButton_oneComment.setEnabled(value)
             self.pushButton_oneOpenPs.setEnabled(value)
             self.pushButton_oneOpenFolder.setEnabled(value)
+            self.pushButton_saveList.setEnabled(value)
 
         self.checkBox_raw.setEnabled(value)
         self.checkBox_jpg.setEnabled(value)
