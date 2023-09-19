@@ -56,6 +56,7 @@ class PSOpener(QWidget, UI):
         self.pshop = Photoshop(self)  # механизм открытия в фотошоп
         self.save_list = SaveList(self) # кнопка сохранения списка
         self.select_photos = SelectPhotos(self) # кнопка выбора произвольных фотографий
+        self.load_list = LoadList(self) # загрузить список фотографий
 
         # окошко для комментария
         self.pushButton_oneComment.clicked.connect(self.open_modal_comment)

@@ -17,6 +17,7 @@ from modules.comment_window import CommentWindow
 from modules.peter import PeterWindow
 from modules.save_list import SaveList
 from modules.select_photos import SelectPhotos
+from modules.load_list import LoadList
 
 # Дополнительные функции
 from modules.api import load_key_to_api

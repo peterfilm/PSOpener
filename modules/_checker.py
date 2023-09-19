@@ -37,4 +37,5 @@ class Checker:
                 QCursor(Qt.ArrowCursor))
             self.label_pathSelectedPhoto.setToolTip('')
             self.label_pathSelectedPhoto.setText('')
+            self.lineEdit_choisePhotos.setText('Выберите папку с фотографиями')
         Checker.disabler(self, Checker.DISABLER)

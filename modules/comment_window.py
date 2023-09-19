@@ -40,7 +40,7 @@ class CommentWindow(QDialog, UiComment):
         else:
             link = os.path.normpath(os.path.join(
                 parent.lineEdit_choisePhotos.text(), self.returnto.split(' @')[0]))
-            if os.path.exists(link):
+            if os.path.exists(link) and self.mw.checkBox_allFolders.checkState() == 0:
                 self.label_name.setText(link)
                 self.path = 1
             else:
@@ -59,6 +59,11 @@ class CommentWindow(QDialog, UiComment):
                 self, 'Ошибка', 'Введите комментарий к фотографии')
 
     def simple_close(self):
-        if self.returnto != 'PS Opener':
+        if self.returnto != conf['PROGRAM_NAME']:
             activate_window_by_title(self.returnto)
         self.close()
+        
+    def closeEvent(self, event):
+        if self.returnto != conf['PROGRAM_NAME']:
+            activate_window_by_title(self.returnto)
+        

@@ -20,8 +20,7 @@ class PhotoshopChecker:
         self.pushButton_choisePhotos.setEnabled(value)
         self.pushButton_choiseYourPhotos.setEnabled(value)
         self.pushButton_choiseYourPhotos.setEnabled(value)
-        self.pushButton_choiseYourPhotos_2.setEnabled(value)
-        self.pushButton_choiseYourPhotos_2.setEnabled(value)
+        self.pushButton_loadList.setEnabled(value)
 
         if self.listWidget.count() != 0:
             self.pushButton_allOpen.setEnabled(value)

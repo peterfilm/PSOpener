@@ -53,21 +53,18 @@ class Selector(QtCore.QThread):
         self.lst = []
 
     def change_folder(self, folder_path):
-        try:
-            if conf['THROUGH_FOLDERS'] == 0:
-                files_with_extension = get_files_by_extension(
-                    folder_path, conf['SELECTED_EXTENSIONS'])
-            elif conf['THROUGH_FOLDERS'] == 1:
-                files_with_extension = get_files_all_folders(
-                    folder_path, conf['SELECTED_EXTENSIONS'])
-            for file in files_with_extension:
-                if file is not None:
-                    file_name = os.path.basename(file)
-                    item = QListWidgetItem(file_name)
-                    item.value = os.path.normpath(file)
+        if conf['THROUGH_FOLDERS'] == 0:
+            files_with_extension = get_files_by_extension(
+                folder_path, conf['SELECTED_EXTENSIONS'])
+        elif conf['THROUGH_FOLDERS'] == 1:
+            files_with_extension = get_files_all_folders(
+                folder_path, conf['SELECTED_EXTENSIONS'])
+        for file in files_with_extension:
+            if file is not None:
+                file_name = os.path.basename(file)
+                item = QListWidgetItem(file_name)
+                item.value = os.path.normpath(file)
                 self.lst.append(item)
-        except Exception as e:
-            print(e)
 
     def run(self):  # обязательный для потоков метод
         self.change_folder(self.link)
@@ -108,16 +105,19 @@ class ChooseFolder:
         folder_path = QFileDialog.getExistingDirectory(
             self.mw, 'Выберите папку', conf['LAST_PATH'])
         if folder_path:
-            self.mw.listWidget.clear()
-            self.mythread = Selector(link=folder_path)
-            self.mythread.started.connect(self.on_started)
-            self.mythread.finished.connect(self.on_finished)
-            self.mythread.mysignal.connect(
-                self.on_change, QtCore.Qt.QueuedConnection)  # обработчик этого сигнала
-            self.mw.lineEdit_choisePhotos.setText(folder_path)
-            self.mythread.start()
-            load_key_to_api('LAST_PATH', folder_path)
-            conf['LAST_PATH'] = os.path.normpath(folder_path)
+            try:
+                self.mw.listWidget.clear()
+                self.mythread = Selector(link=folder_path)
+                self.mythread.started.connect(self.on_started)
+                self.mythread.finished.connect(self.on_finished)
+                self.mythread.mysignal.connect(
+                    self.on_change, QtCore.Qt.QueuedConnection)  # обработчик этого сигнала
+                self.mw.lineEdit_choisePhotos.setText(folder_path)
+                self.mythread.start()
+                load_key_to_api('LAST_PATH', folder_path)
+                conf['LAST_PATH'] = os.path.normpath(folder_path)
+            except:
+                pass
 
     def on_started(self):
         self.mw.label_pathSelectedPhoto.setText('загружаю базу...')
